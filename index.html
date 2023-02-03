@@ -8,6 +8,81 @@
   <title>Library</title>
 </head>
 <body>
-  
+  <div class="header"><h2>The Library</h2></div>
+  <div class="container">
+    <div class="new-book-form">
+      <div class="form-title"><h3>Add New Book</h3></div>
+      <form class="form-container">
+        <label for="title">TITLE</label>
+        <div class="title"><input type="text" name="title" id="title" required></div>
+        <label for="author">AUTHOR</label>
+        <div class="author"><input type="text" name="author" id="author" required></div>
+        <label for="nbr_pages">Nº Pages</label>
+        <div class="nbr_pages"><input type="number" name="nbr_pages" id="nbr_pages"  required></div>
+       
+        <div class="toggle-btn">
+          <span class="label">Read Book ?</span>
+          <label for="togBtn" class="switch">
+            <input type="checkbox" id="togBtn" name="read_book">
+            <div class="slider"></div>
+          </label>
+        </div>
+        <div class="submit-btn">
+          <button type="submit">Add Book</button>
+        </div>
+      </form>
+    </div>
+    <div class="list-of-books">
+      <div class="card-container">
+        <div class="book-card">
+             <div class="title">
+              <span><em>Title:</em> </span> Test title
+             </div>
+             <div class="author">
+              <span><em>Author:</em> </span> Test author
+             </div>
+             <div class="nbr_pages">
+              <span><em>Nbr Pages:</em> </span> 288
+             </div>
+             <div class="book_read">
+              <span><em>Book Read?</em></span> Yes<input type="radio" name="read" id="read"> 
+              No<input type="radio" name="read" id="read">
+             </div>
+        </div>
+        <div class="book-card">
+             <div class="title">
+              <span><em>Title:</em> </span> Test title
+             </div>
+             <div class="author">
+              <span><em>Author:</em> </span> Test author
+             </div>
+             <div class="nbr_pages">
+              <span><em>Nbr Pages:</em> </span> 288
+             </div>
+             <div class="book_read">
+              <span><em>Book Read?</em></span> Yes<input type="radio" name="read" id="read"> 
+              No<input type="radio" name="read" id="read">
+             </div>
+        </div>
+        <div class="book-card">
+             <div class="title">
+              <span>Title: </span> Test title
+             </div>
+             <div class="author">
+              <span>Author: </span> Test author
+             </div>
+             <div class="nbr_pages">
+              <span>Nbr Pages: </span> 288
+             </div>
+             <div class="book_read">
+              <span>Book Read?</span> Yes<input type="radio" name="read" id="read"> 
+              No<input type="radio" name="read" id="read">
+             </div>
+      </div>
+      </div>
+      
+      </div>
+    </div>
+  </div>
 </body>
 </html>
