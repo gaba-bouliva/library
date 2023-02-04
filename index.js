@@ -1,13 +1,22 @@
 
 
 let myLibrary = [];
+let bookIds = {};
+const cardList = document.querySelector('.card-container');
+
+function deleteBook (bookId){
+  console.log('delete book with id: ', bookId);
+ myLibrary = myLibrary.filter((book) => book.id !== bookId );
+ updateDomWithBookList();
+}
+
 
 function updateDomWithBookList(){
+  
   if(myLibrary.length){
     
-    const cardList = document.querySelector('.card-container');
     cardList.innerHTML = '';
-    
+
     for (let i = 0; i < myLibrary.length; i++){
       let currentBook = myLibrary[i];
     
@@ -19,7 +28,7 @@ function updateDomWithBookList(){
       titleDiv.innerHTML = `<span><em>Title:</em></span> ${currentBook.title}`;
       cardDiv.appendChild(titleDiv)
   
-  
+
       const authorDiv = document.createElement('div');
       authorDiv.className = 'author';
       authorDiv.innerHTML = `<span><em>Author:</em> </span> ${currentBook.author}`;
@@ -34,18 +43,43 @@ function updateDomWithBookList(){
 
       const alreadyReadBookDiv = document.createElement('div');
       alreadyReadBookDiv.className = 'book_read';
+      const toggleReadBookDiv = document.createElement('div');
+      toggleReadBookDiv.className = 'toggle-btn';
       
+
       if (currentBook.read){
-        alreadyReadBookDiv.innerHTML = `<span><em>Book Read?</em></span> Yes`;
+        
+        toggleReadBookDiv.innerHTML = `<span class="label">Read Book ?</span>
+                                       <label for="${currentBook.id}" class="switch">
+                                       <input type="checkbox" id="${currentBook.id}" name="read" checked>
+                                       <div class="slider"></div></label>`
       }else{
-        alreadyReadBookDiv.innerHTML = `<span><em>Book Read? No`;
+        
+        toggleReadBookDiv.innerHTML = `<span class="label">Read Book ?</span>
+                                       <label for="${currentBook.id}" class="switch">
+                                       <input type="checkbox" id="${currentBook.id}" name="read">
+                                       <div class="slider"></div></label>`
       }
+
+      toggleReadBookDiv.addEventListener('change', () => updateReadBook(currentBook.id))
+      cardDiv.appendChild(toggleReadBookDiv);
+
+      const deleteBookBtn = document.createElement('button');
+      deleteBookBtn.className = 'delete-book-btn';
+      deleteBookBtn.innerText = 'delete';
+      deleteBookBtn.addEventListener('click', () => deleteBook(currentBook.id));
+      deleteBookBtn.id = currentBook.id;
       
-      cardDiv.appendChild(alreadyReadBookDiv);
+      cardDiv.appendChild(deleteBookBtn);
 
       cardList.appendChild(cardDiv);
     }
+  }else{
+    
+    cardList.innerHTML = '';
   }
+
+
 }
 
 
@@ -55,10 +89,17 @@ function Book (title, author, pages, read) {
    * Input: title: string,     author: string pages: number, read: boolean
    * Output: string
    */
+
+  let id =  Math.floor(Math.random() * (101 - 1) + 1);
+  while (bookIds.hasOwnProperty(id)) {
+    id =  Math.floor(Math.random() * (101 - 1) + 1);
+  }
+  this.id = id;
   this.title = title
   this.author = author
   this.pages = pages
   this.read = read
+  
 
   this.info = () => {
     let readMsg = null
@@ -71,6 +112,7 @@ function Book (title, author, pages, read) {
   }
 
   return {
+    'id': this.id,
     'title': this.title,
     'author': this.author,
     'pages': this.pages,
@@ -95,7 +137,9 @@ function addBookToLibrary (formData) {
   }
   if(book){
     myLibrary.push(book);
+    bookIds[book.id] = book;
   }
+  console.log('Added Book to library..');
   updateDomWithBookList();
 
 }
@@ -103,7 +147,8 @@ function addBookToLibrary (formData) {
 form = document.querySelector('.form-container').addEventListener('submit', (event) =>{
   event.preventDefault();
   addBookToLibrary(event);
-});;
+});
+
 
 //
 
