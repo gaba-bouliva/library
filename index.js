@@ -5,11 +5,18 @@ let bookIds = {};
 const cardList = document.querySelector('.card-container');
 
 function deleteBook (bookId){
-  console.log('delete book with id: ', bookId);
  myLibrary = myLibrary.filter((book) => book.id !== bookId );
  updateDomWithBookList();
 }
 
+function updateReadBook(bookId){
+  myLibrary.forEach(book => {
+    if ( book.id === bookId){
+       book.read = !book.read;
+      }
+  });
+ 
+}
 
 function updateDomWithBookList(){
   
@@ -45,7 +52,6 @@ function updateDomWithBookList(){
       alreadyReadBookDiv.className = 'book_read';
       const toggleReadBookDiv = document.createElement('div');
       toggleReadBookDiv.className = 'toggle-btn';
-      
 
       if (currentBook.read){
         
@@ -139,7 +145,6 @@ function addBookToLibrary (formData) {
     myLibrary.push(book);
     bookIds[book.id] = book;
   }
-  console.log('Added Book to library..');
   updateDomWithBookList();
 
 }
