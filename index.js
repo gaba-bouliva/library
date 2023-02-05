@@ -99,13 +99,7 @@ function Book (title, author, pages, read) {
     return `${this.title}, by ${this.author} ${this.pages} pages, ${readMsg} `
   }
 
-  return {
-    id: this.id,
-    title: this.title,
-    author: this.author,
-    pages: this.pages,
-    read: this.read
-  }
+  
 }
 
 function addBookToLibrary (formData) {
@@ -120,7 +114,7 @@ function addBookToLibrary (formData) {
   const read = false // by default user hasn't read the book
 
   if (title && author && pages) {
-    book = Book(title, author, pages, read)
+    book = new Book(title, author, pages, read)
   }
   if (book) {
     myLibrary.push(book)
