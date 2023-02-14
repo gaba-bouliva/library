@@ -12,6 +12,7 @@ function updateReadBook (bookId) {
   myLibrary.forEach(book => {
     if (book.id === bookId) {
       book.read = !book.read
+      console.log(book)
     }
   })
 }
@@ -76,20 +77,24 @@ function updateDomWithBookList () {
   }
 }
 
-function Book (title, author, pages, read) {
+class Book {
   
-  let id = Math.floor(Math.random() * (101 - 1) + 1)
+  constructor(title, author, pages, read){
+    this.title = title
+    this.author = author
+    this.pages = pages
+    this.read = read
+    this.id = Math.floor(Math.random() * (101 - 1) + 1)
 
-  while (id in bookIds) {
-    id = Math.floor(Math.random() * (101 - 1) + 1)
+    while (this.id in bookIds) {
+      // make sur the id is not already taken
+      this.id = Math.floor(Math.random() * (101 - 1) + 1)
+    }
+    
   }
-  this.id = id
-  this.title = title
-  this.author = author
-  this.pages = pages
-  this.read = read
+  
 
-  this.info = () => {
+  info = () => {
     let readMsg = null
     if (this.read) {
       readMsg = 'already read'
@@ -102,15 +107,15 @@ function Book (title, author, pages, read) {
   
 }
 
-function addBookToLibrary (formData) {
+function addBookToLibrary (event) {
   /**
    * Adds a book to myLibrary
    */
   let book = null
 
-  const title = formData.target.title.value
-  const author = formData.target.author.value
-  const pages = parseInt(formData.target.nbr_pages.value)
+  const title = event.target.title.value
+  const author = event.target.author.value
+  const pages = parseInt(event.target.nbr_pages.value)
   const read = false // by default user hasn't read the book
 
   if (title && author && pages) {
