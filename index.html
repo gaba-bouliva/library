@@ -14,11 +14,11 @@
       <div class="form-title"><h3>Add New Book</h3></div>
       <form class="form-container">
         <label for="title">TITLE</label>
-        <div class="title"><input type="text" name="title" id="title" required></div>
+        <div class="title"><input type="text" name="title" id="title" required minlength="3"></div>
         <label for="author">AUTHOR</label>
-        <div class="author"><input type="text" name="author" id="author" required></div>
+        <div class="author"><input type="text" name="author" id="author" required minlength="3"></div>
         <label for="nbr_pages">Nº Pages</label>
-        <div class="nbr_pages"><input type="number" name="nbr_pages" id="nbr_pages"  required></div>
+        <div class="nbr_pages"><input type="number" name="nbr_pages" id="nbr_pages"  min="10" required></div>
        
         <div class="toggle-btn">
           <span class="label">Read Book ?</span>
